@@ -1,8 +1,7 @@
 /* eslint-disable indent */
 import store from './store.js';
 import api from './api.js';
-// build render function, manually change and check if still
-// works then set buttons and call render to auto populate info
+
 
 
     const greaterThanFilter = function(){ 
@@ -15,11 +14,11 @@ import api from './api.js';
         });
      };
 
-    //console.log($('.filter').val());      
+      
 
 const render = function () {
     
-    let bookmarks = [...store.bookmarks];
+    let bookmarks = [...api.getBookmarks()];
     console.log(bookmarks);
     if(store.filter>0) {
         bookmarks = bookmarks.filter(bookmark => bookmark.rating>=store.filter);

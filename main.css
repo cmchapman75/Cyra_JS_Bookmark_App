@@ -183,11 +183,11 @@ legend {
 
 
 .collapsed-bookmarks {
-    height: 50px;
+    
     padding: 25px;
 }
 .expanded-bookmarks {
-    height: 220px;
+    
     padding: 25px;
     background-color: #DDE2E3;
     border-radius: 15px;
