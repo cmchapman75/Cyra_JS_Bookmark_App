@@ -161,7 +161,7 @@ legend {
 }
 
 .add-new, .filter{
-    font-size: 26px;
+    font-size: 20px;
     cursor: pointer;
     background-color:black;
     color: rgb(245, 191, 224);
@@ -238,7 +238,7 @@ legend {
     float: right;
     margin-right: 10%;
     padding: 3px;
-    margin-top: -45px;
+    margin-top: 5px;
     color: rgb(245, 191, 224);
     background-color: black;
     border: 2.5px solid aqua;

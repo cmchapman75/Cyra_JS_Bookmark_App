@@ -40,6 +40,7 @@ const getBookmarks = function () {
 };
 
 const newBookmark = function (id, title, rating, url, desc) {
+    console.log('I am here');
     const newInput = JSON.stringify({ id, title, rating, url, desc });
     return listApiFetch(`${BASE_URL}/bookmarks`, {
         method: 'POST',

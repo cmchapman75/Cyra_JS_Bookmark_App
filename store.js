@@ -22,7 +22,8 @@ return this.bookmarks.push(bookmark);
 };
 
 const toggleExpandedId = function(id) {
-let bookmark = findById(id);
+let bookmark = this.findById(id);
+console.log(bookmark);
 bookmark.expanded = !bookmark.expanded;
 return bookmark.expanded;
 };

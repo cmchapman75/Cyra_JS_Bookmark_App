@@ -1,7 +1,8 @@
 /* eslint-disable indent */
 import store from './store.js';
 import api from './api.js';
-
+// build render function, manually change and check if still
+// works then set buttons and call render to auto populate info
 
 
     const greaterThanFilter = function(){ 
@@ -14,29 +15,35 @@ import api from './api.js';
         });
      };
 
-      
+    //console.log($('.filter').val());      
 
 const render = function () {
-    
-    let bookmarks = [...api.getBookmarks()];
-    console.log(bookmarks);
-    if(store.filter>0) {
-        bookmarks = bookmarks.filter(bookmark => bookmark.rating>=store.filter);
-    }
+    api.getBookmarks().then(function (response){       
+      let bookmarks = response;
+        if ( store.bookmarks.length === 0 )  {
+            bookmarks.forEach(bookmark => {
+                store.addBookmark(bookmark);                
+            });
+        }
+        if(store.filter>0) {
+            bookmarks = bookmarks.filter(bookmark => bookmark.rating>=store.filter);
+        }
 
-    let html;
+        let html;
 
-    if(store.adding) {
-        html = generateAddBookmarkHtml();
-    } else {
-        html = bookmarks.map(item => generateBookmarkHtml(item)).join('');
-    }
+        if(store.adding) {
+            html = generateAddBookmarkHtml();
+        } else {
+            html = bookmarks.map(item => generateBookmarkHtml(item)).join('');
+        }
 
-    if (store.error) {
-        html = `<div>${store.error}</div>` + html;
-    }
+        if (store.error) {
+            html = `<div>${store.error}</div>` + html;
+        }
 
-    $('main').html(html);
+        $('main').html(html);
+    });   
+        
 
 };
 
