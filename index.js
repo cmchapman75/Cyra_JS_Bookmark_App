@@ -83,7 +83,7 @@ const handleNewBookmarkSubmit = function () {
         e.preventDefault(); 
         const name = $('#name').val();
         const url = $('#url').val();
-        const rating = $('.rating:checked').val();
+        const rating = $('.ratings: checked').val();
         const desc = $('#description').val();
 
         $('#main-container')[0].reset();
