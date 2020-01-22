@@ -99,84 +99,77 @@ const handleNewBookmarkSubmit = function () {
     });
 };
 
+const generateBookmarkHtml = function(bookmark){
+    if(!bookmark.expanded){
+      return `
+          <section class="colllapsed-bookmarks" id="${bookmark.id}">
+            <div class="title-bar">
+                 <legend class="saved-title">${bookmark.title}</legend>
+                <button class="remove" data-item-id='${bookmark.id}'>X</button>
+                <div class="display-rating-collapsed">${convertToStars(bookmark.rating)}</div>
+            </div>
+            <div class="expand-button">
+                <button type="button" data-item-id='${bookmark.id}' class="expand">Expand</button>  
+            </div>
+          </section>
+        `;    
 
-const generateBookmarkHtml = function (item) {
-    if (item.expanded) {
-        let expandedBookmarkHtml = `
-    <form class="expanded-bookmarks">
-    <div class="title-bar">
-        <button class="remove" data-item-id='${item.id}'>X</button>
-        <legend class="saved-title">${item.title}</legend> 
-    </div>
-
-    <div class="link-btn">
-    <a href="${item.url}" target="_blank"><button type="button" class="url-link">Visit Site</button></a>
-    </div>
-
-    <div class="display-rating">${item.rating}</div>
-    <div class="description-text">
-    
-        <p>${item.desc}
-        </p>
-    </div>
-    <div class="expand-button">
-        <button type="button" data-item-id='${item.id}' class="expand">Collapse</button>  
-    </div>
-</form>`;
-        return expandedBookmarkHtml;
+    } else {
+      return `
+          <section class="expanded-bookmarks" >
+            <div class="title-bar">
+              <button class="remove" data-item-id='${bookmark.id}'>X</button>
+              <legend class="saved-title">${bookmark.title}</legend>
+              <button data-href="${bookmark.url}" class="linkButton">Visit Site</button>
+              <div>${convertToStars(bookmark.rating)}</div>
+              <p>${bookmark.desc}</p>
+              
+            </div>
+          </section>
+        `;
+    }  
+  };
+                  
+  const convertToStars = function(num){
+    switch (num){
+    case 5:
+      return '★★★★★';
+    case 4:
+      return '★★★★☆';
+    case 3:
+      return '★★★☆☆';
+    case 2:
+      return '★★☆☆☆';
+    case 1:
+      return '★☆☆☆☆';
     }
-    else {
-        let unexpandedBookmarkHtml = `
-    <form class="collapsed-bookmarks">
-    <div class="title-bar">
-    
-        <button class="remove" data-item-id='${item.id}'>X</button>
-        <legend class="saved-title">${item.title}</legend>
-        <div class="display-rating-collapsed">${item.rating}</div>
-    </div>
-    <div class="expand-button">
-        <button type="button" data-item-id='${item.id}' class="expand">Expand</button>  
-    </div>
-    </form>`;
-    return unexpandedBookmarkHtml;
-    }
-};
-
-
+  };  
 
 
 const generateAddBookmarkHtml = function () {
     let addBookmarkHtml = `    
-     <form id="main-container">
-    <label for="name">Name</label><br>
-    <input id="name" name="name" type="text" placeholder="Trees" required>
-       <br> 
-    <label for="url">URL</label> <br>
-    <input id="url" name="url" type="url" placeholder="www.trees.com">
-
-    <legend class="rating-form">Rating:</legend>
-        <section class="rating-form">
-            <div class="ratings">
-                <label for="5star">5 Stars: </label>       
-                    <input class="rating" type="radio" id="5star" name="rating" value="5" required checked/><br>
+     <form id="main-container" class="main-container">
+        <label for="name">New Bookmark: </label>
+        <input id="name" name="name" type="text" 
+             placeholder="Trees" required>
         
-                <label for="4star">4 Stars: </label>
-                    <input class="rating" type="radio" id="4star" name="rating" value="4" required checked/><br>
-                    
-                <label for="3star">3 Stars: </label>
-                    <input class="rating" type="radio" id="3star" name="rating" value="3" required checked/><br>
-                      
-                <label for="2star">2 Stars: </label>
-                    <input class="rating" type="radio" id="2star" name="rating" value="2" required checked/><br>
-                    
-                <label for="1star">1 Stars: </label>
-                    <input class="rating" type="radio" id="1star" name="rating" value="1" required checked/><br>  
-                    
-            <div>
-        </section>
-        
+        <label for="url">URL: </label> 
+        <input id="url" name="url" type="url" 
+                placeholder="http://www.trees.com">
 
-        <label for="description">What's this site about?</label><br>
+        <legend class="rating-form">Rating:</legend>
+          <section class="rating-form">
+            <select id="newBookmarkRating" name="rating" class="ratings" required>
+            <option value="">Rating</option>
+            <option value="5">★★★★★</option>
+            <option value="4">★★★★☆</option>
+            <option value="3">★★★☆☆</option>
+            <option value="2">★★☆☆☆</option>
+            <option value="1">★☆☆☆☆</option>
+            </select>
+        </section>        
+
+        <label for="description">What's this site about?</label>
         <input id="description" name="description" type="text" placeholder="Website on Trees!"></input>
     
     <div class="create-cancel-buttons">    
