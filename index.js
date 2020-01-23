@@ -52,11 +52,17 @@ const getItemIdFromElement = function (item) {
 };
 
 const handleToggleExpandClick = function () {
-    $('main').on('click', '.expand', (e) => {
+    $('main').on('click', '.condensed', (e) => {
         e.preventDefault();
         console.log('expand is working!');
         const id = getItemIdFromElement(e.currentTarget);
-        store.toggleExpandedId(id, true);
+        store.toggleExpandedId(id);
+        render();
+    });
+    $('main').on('click', '.expanded', (e) => {
+        e.preventDefault();
+        const id = getItemIdFromElement(e.currentTarget);
+        store.toggleExpandedId(id);
         render();
     });
 };
@@ -104,27 +110,25 @@ const handleNewBookmarkSubmit = function () {
 const generateBookmarkHtml = function(bookmark){
     if(!bookmark.expanded){
       return `
-          <section class="colllapsed-bookmarks" id="${bookmark.id}">
-            <div class="title-bar">
-                 <legend class="saved-title">${bookmark.title}</legend>
-                <button class="remove" data-item-id='${bookmark.id}'>X</button>
+          <section class="condensed" id="${bookmark.id}">
+            <div class="title-bar-condensed">
+                 <legend class="saved-title">${bookmark.title}</legend>                
                 <div class="display-rating-collapsed">${convertToStars(bookmark.rating)}</div>
-            </div>
-            <div class="expand-button">
-                <button type="button" data-item-id='${bookmark.id}' class="expand">Expand</button>  
-            </div>
+                    <button class="remove" data-item-id='${bookmark.id}'>X</button>
+                </div>          
           </section>
         `;    
 
     } else {
       return `
-          <section class="expanded-bookmarks" >
-            <div class="title-bar">
-              <button class="remove" data-item-id='${bookmark.id}'>X</button>
+          <section class="expanded" id="${bookmark.id} >
+            <div class="title-bar-expanded">
+              
               <legend class="saved-title">${bookmark.title}</legend>
               <button data-href="${bookmark.url}" class="linkButton">Visit Site</button>
               <div>${convertToStars(bookmark.rating)}</div>
               <p>${bookmark.desc}</p>
+              <button class="remove" data-item-id='${bookmark.id}'>X</button>
               
             </div>
           </section>

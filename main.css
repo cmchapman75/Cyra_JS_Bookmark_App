@@ -181,11 +181,11 @@ legend {
 
 
 
-.collapsed-bookmarks {
+.condensed {
     
     padding: 25px;
 }
-.expanded-bookmarks {
+.expanded {
     
     padding: 25px;
     background-color: #DDE2E3;
