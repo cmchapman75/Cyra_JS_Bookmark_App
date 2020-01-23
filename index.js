@@ -53,6 +53,8 @@ const getItemIdFromElement = function (item) {
 
 const handleToggleExpandClick = function () {
     $('main').on('click', '.expand', (e) => {
+        e.preventDefault();
+        console.log('expand is working!');
         const id = getItemIdFromElement(e.currentTarget);
         store.toggleExpandedId(id, true);
         render();
